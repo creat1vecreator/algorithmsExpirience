@@ -8,7 +8,7 @@ import static java.lang.System.out;
 public class Main {
     public static int[] array = {1, 2, 4, -1, 5, 1, 43, 12, 98, 56, 78, 12};
     private static final String delimiter = "------------------------------------------------------------------------------------------------------------------------------------";
-    private static final String string = "some string";
+    private static final String string = "equal";
 
     public static void main(String[] args) {
         out.println("Do the array Elements located before " +
@@ -21,7 +21,7 @@ public class Main {
         out.println("You are given a lowercase alphabet string text. " +
                 " Return a new string where every character in text is\n" +
                 "mapped to its reverse in the alphabet, so that a becomes z, b becomes y, c becomes x, and so on.");
-//        out.println(reversedAlphabet(string));
+        out.println(reversedAlphabet(string));
         out.println(delimiter);
         out.println();
 
@@ -141,6 +141,13 @@ public class Main {
         out.println();
 
 
+        List<String> strings1 = new ArrayList<>(Arrays.asList("aaa", "aaa", "bb", "bbb", "cc", "ccc", "ccc", "ddd", "ddd", "ddd", "ddd"));
+        out.println("maximal equal consequence of elements in: " + strings1 + " is: ");
+        maxEqualElems(strings1);
+        out.println(delimiter);
+        out.println();
+
+
     }
 
     public static boolean isIncreasing(int[] array) {
@@ -166,35 +173,24 @@ public class Main {
 
     public static String reversedAlphabet(String text) {
         List<Character> word = new ArrayList<>();
-        for (int i = 0; i < text.length(); i++) {
+        for (int i = 0; i < text.length() ; i++) {
             word.add(text.charAt(i));
-
         }
         List<Character> alphabet = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
                 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
                 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
         List<Character> modifiedList = new ArrayList<>();
-        for (int i = 0; i < word.size(); i++) {
-        }
 
-
-        for (int i = 0; i < word.size(); i++) {
+        for (int i = 0; i < word.size() ; i++) {
             int index = alphabet.indexOf(word.get(i));
-            modifiedList.add(alphabet.get(25 - index));
+            modifiedList.add(alphabet.get(25-index));
         }
-        StringBuilder sb = new StringBuilder();
-        for (Character ch : modifiedList) {
-            sb.append(ch);
-        }
-
-        String string = sb.toString();
-
+        String string =  modifiedList.stream().map(String::valueOf).collect(Collectors.joining());
         return string;
     }
 
     public static String reversedCase(String s) {
         char[] ch = new char[s.length()];
-        String pops = "";
 
         for (int i = 0; i < s.length(); i++) {
             ch[i] = s.charAt(i);
@@ -207,8 +203,8 @@ public class Main {
             }
 
         }
-        pops = String.valueOf(ch);
-        return pops;
+
+        return String.valueOf(ch);
     }
 
     public static int[] reversedArray(int[] nums) {
@@ -224,7 +220,7 @@ public class Main {
         String[] strings1 = s.split(" ");
         String answer = Arrays.
                 stream(strings1).
-                map(str -> str = str.substring(1, str.length()) + str.substring(0, 1) + "ay" + " ").
+                map(str -> str = str.substring(1) + str.substring(0, 1) + "ay" + " ").
                 collect(Collectors.joining());
 
         return answer.substring(0, answer.length() - 1);
@@ -268,9 +264,9 @@ public class Main {
     public static List<String> theShortestStrings(List<String> list) {
         String min = list.get(0);
         List<String> theShortestStrings = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (min.length() > list.get(i).length())
-                min = list.get(i);
+        for (String s : list) {
+            if (min.length() > s.length())
+                min = s;
         }
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).length() == min.length()) {
@@ -299,7 +295,6 @@ public class Main {
 
     public static int theLongestSequence(List<Integer> list) {
         int maxlength = 0;
-        int start = 0;
         for (int i = 0; i < list.size() - 1; i++) {
             int counter = 1;
             int k = i + 1;
